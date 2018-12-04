@@ -1,15 +1,15 @@
 pragma solidity ^0.4.24;
 
 import "../node_modules/openzeppelin-solidity/contracts/math/SafeMath.sol";
+import "./TribunalRole.sol";
+import "./BountyHunterRole.sol";
 
 /**
  * @title Arbitration Contract
  * @dev The contract used to save arbitration data.
  */
-contract Arbitrations {
+contract Arbitrations is BountyHunterRole, TribunalRole {
     using SafeMath for uint256;
-
-    uint256 storedData;
 
     struct Veredicts {
         bool agreed;
@@ -20,11 +20,13 @@ contract Arbitrations {
         uint256 company;
         uint256 emissionsReport;
         bytes32[] inputs;
-        //Veredicts[] veredicts;
     }
 
     Arbitration[] private arbitration;
     uint256 totalArbitration;
+
+    mapping(uint256 => Veredicts[]) private veredicts;
+    mapping(uint256 => uint256) private totalVeredicts;
 
     /**
      * @dev Constructor
@@ -42,8 +44,10 @@ contract Arbitrations {
         address _bountyHunter,
         uint256 _emissionsReport,
         bytes32[] memory _inputs)
-        public returns(uint256) {
-        arbitration.push(Arbitration(_bountyHunter, _company, _emissionsReport, _inputs));
+        public onlyBountyHunter returns(uint256) {
+        arbitration.push(
+            Arbitration(_bountyHunter, _company, _emissionsReport, _inputs)
+        );
         totalArbitration = totalArbitration.add(1);
         return totalArbitration;
     }
@@ -66,7 +70,38 @@ contract Arbitrations {
             arbitration[_index].bountyHunter,
             arbitration[_index].emissionsReport,
             arbitration[_index].inputs.length
-            //arbitration[_index].veredicts.length
+        );
+    }
+
+    /**
+     * @dev Get inputs from arbitration
+     */
+    function getInput(uint256 _arbitrationIndex, uint256 _inputIndex)
+        public view returns(bytes32) {
+        return (arbitration[_arbitrationIndex].inputs[_inputIndex]);
+    }
+
+    /**
+     * @dev Add veredict to arbitration
+     */
+    function addVeredict(bool _agreed, uint256 _company) public onlyTribunal {
+        veredicts[_company].push(Veredicts(_agreed, msg.sender));
+        totalVeredicts[_company] = totalVeredicts[_company].add(1);
+    }
+
+    /**
+     * @dev Get total veredicts by company
+     */
+    function getTotalVeredicts(uint256 _company) public view returns(uint256) {
+        return totalVeredicts[_company];
+    }
+
+    /**
+     * @dev Get a veredict in company
+     */
+    function getVeredict(uint256 _company, uint256 _index) public view returns(bool, address) {
+        return (
+            veredicts[_company][_index].agreed, veredicts[_company][_index].tribunal
         );
     }
 }
