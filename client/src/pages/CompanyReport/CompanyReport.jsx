@@ -59,9 +59,9 @@ class CompanyReport extends Component {
 
                         <li className="ReportCard__Button">
                             {this.state.isHidden === false ? (
-                                <button onClick={() => this.toggleHidden()} type="button" className="btn btn__lg btn__Black btn__Center">NEW REPORT</button>
+                                <button onClick={() => this.toggleHidden()} type="button" className="btn btn__lg btn__Success btn__Center">NEW REPORT</button>
                             ) : (
-                                <button onClick={() => this.toggleHidden()} type="button" className="btn btn__lg btn__Black btn__Center">SUBMIT REPORT</button>
+                                <button onClick={() => this.toggleHidden()} type="button" className="btn btn__lg btn__Success btn__Center">SUBMIT REPORT</button>
                             )}
                         </li>
 

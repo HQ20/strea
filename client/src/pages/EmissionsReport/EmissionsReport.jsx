@@ -59,9 +59,9 @@ class EmissionsReport extends Component {
 
                         <li className="ReportCard__Button">
                             {this.state.isHidden === false ? (
-                                <button onClick={() => this.toggleHidden()} type="button" className="btn btn__lg btn__Black btn__Center">OPEN CASE</button>
+                                <button onClick={() => this.toggleHidden()} type="button" className="btn btn__lg btn__Success btn__Center">OPEN CASE</button>
                             ) : (
-                                <button onClick={() => this.toggleHidden()} type="button" className="btn btn__lg btn__Black btn__Center">SUBMIT CASE</button>
+                                <button onClick={() => this.toggleHidden()} type="button" className="btn btn__lg btn__Success btn__Center">SUBMIT CASE</button>
                             )}
                         </li>
 
