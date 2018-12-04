@@ -1,0 +1,18 @@
+.Navbar {
+    position: relative;
+    margin-bottom: 30px;
+    background: #000;
+    width: 100vw;
+    height: 60px;
+    z-index: -10;
+}
+
+
+.Navbar__Logo {
+    height: 46px;
+    width: 46px;
+    padding: 7px 0px;
+    display: block;
+    margin: auto;
+}
+

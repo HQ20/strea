@@ -2,6 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route } from 'react-router-dom';
+import Navbar from './pages/Navbar/Navbar';
 import Main from './pages/Main';
 import CompanyReport from './pages/CompanyReport/CompanyReport';
 import EmissionsReport from './pages/EmissionsReport/EmissionsReport';
@@ -13,6 +14,7 @@ export default function renderApp() {
     ReactDOM.render(
         <BrowserRouter>
             <div>
+                <Navbar />
                 <Route path="/" exact component={Main} />
                 <Route path="/company-report" component={CompanyReport} />
                 <Route path="/emissions-report" component={EmissionsReport} />

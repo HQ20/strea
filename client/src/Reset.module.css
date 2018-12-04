@@ -46,3 +46,9 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+input:-webkit-input-placeholder,
+input:-moz-placeholder,
+input:-ms-input-placeholder {
+    font-size: 20px;
+}
