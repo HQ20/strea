@@ -73,7 +73,7 @@ class Main extends Component {
                         <p className="Company__CardTitle Company__CardTitle--Bold">Company Name</p>
                         <p className="Company__CardTitle Company__CardTitle--Bold">Suppliers</p>
                         <p className="Company__CardTitle Company__CardTitle--Bold">Emissions</p>
-                        <p className="Company__CardTitle Company__CardTitle--Bold">Tons of Carbon</p>
+                        <p className="Company__CardTitle Company__CardTitle--Bold">Tonnes of Carbon</p>
                         <p className="Company__CardTitle Company__CardTitle--Bold">Date</p>
                     </li>
                     {
@@ -90,7 +90,11 @@ class Main extends Component {
                                     {' '}
                                     Emissions
                                 </p>
-                                <p className="Company__CardTitle">25 Tons of Carbon</p>
+                                <p className="Company__CardTitle">
+                                    {c[2] * 1}
+                                    {' '}
+                                    Tonnes of Carbon
+                                </p>
                                 <p className="Company__CardTitle">11 Nov 2018</p>
                                 <button type="button" className="btn btn__Success btn__Center">VIEW</button>
                             </li>
