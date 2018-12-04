@@ -11,10 +11,16 @@ contract Arbitrations {
 
     uint256 storedData;
 
+    struct Veredicts {
+        bool agreed;
+        address tribunal;
+    }
     struct Arbitration {
-        uint256 company;
         address bountyHunter;
-        bytes32 emissionsReport;
+        uint256 company;
+        uint256 emissionsReport;
+        bytes32[] inputs;
+        //Veredicts[] veredicts;
     }
 
     Arbitration[] private arbitration;
@@ -34,9 +40,10 @@ contract Arbitrations {
     function upload(
         uint256 _company,
         address _bountyHunter,
-        bytes32 _emissionsReport)
+        uint256 _emissionsReport,
+        bytes32[] memory _inputs)
         public returns(uint256) {
-        arbitration.push(Arbitration(_company, _bountyHunter, _emissionsReport));
+        arbitration.push(Arbitration(_bountyHunter, _company, _emissionsReport, _inputs));
         totalArbitration = totalArbitration.add(1);
         return totalArbitration;
     }
@@ -53,11 +60,13 @@ contract Arbitrations {
      * @dev Get arbitration information
      */
     function get(uint256 _index)
-        public view returns(uint256, address, bytes32){
+        public view returns(uint256, address, uint256, uint256){
         return(
             arbitration[_index].company,
             arbitration[_index].bountyHunter,
-            arbitration[_index].emissionsReport
+            arbitration[_index].emissionsReport,
+            arbitration[_index].inputs.length
+            //arbitration[_index].veredicts.length
         );
     }
 }

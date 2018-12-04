@@ -11,7 +11,8 @@ contract Companies {
 
     struct Company {
         uint256[] suppliers;
-        uint256[] iEmissions;
+        uint256[] importedEmissions;
+        uint256[] emissionsReports;
     }
 
     Company[] private company;
@@ -30,9 +31,10 @@ contract Companies {
      */
     function upload(
         uint256[] memory _suppliers,
-        uint256[] memory _iEmissions)
+        uint256[] memory _importedEmissions,
+        uint256[] memory _emissionsReports)
         public returns(uint256) {
-        company.push(Company(_suppliers, _iEmissions));
+        company.push(Company(_suppliers, _importedEmissions, _emissionsReports));
         totalCompanies = totalCompanies.add(1);
         return totalCompanies;
     }
@@ -51,10 +53,11 @@ contract Companies {
      * @dev Get company information (array sizes for example)
      * @return Needed information
      */
-    function get(uint256 _index) public view returns (uint256, uint256) {
+    function get(uint256 _index) public view returns (uint256, uint256, uint256) {
         return(
             company[_index].suppliers.length,
-            company[_index].iEmissions.length
+            company[_index].importedEmissions.length,
+            company[_index].emissionsReports.length
         );
     }
 
