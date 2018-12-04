@@ -11,22 +11,22 @@ import "./BountyHunterRole.sol";
 contract Arbitrations is BountyHunterRole, TribunalRole {
     using SafeMath for uint256;
 
-    struct Veredicts {
+    struct Verdicts {
         bool agreed;
         address tribunal;
     }
     struct Arbitration {
+        bool isOpen;
         address bountyHunter;
-        uint256 company;
-        uint256 emissionsReport;
+        uint256 timestamp;
         bytes32[] inputs;
     }
 
     Arbitration[] private arbitration;
     uint256 totalArbitration;
 
-    mapping(uint256 => Veredicts[]) private veredicts;
-    mapping(uint256 => uint256) private totalVeredicts;
+    mapping(uint256 => Verdicts[]) private verdicts;
+    mapping(uint256 => uint256) private totalVerdicts;
 
     /**
      * @dev Constructor
@@ -40,13 +40,10 @@ contract Arbitrations is BountyHunterRole, TribunalRole {
      * @return An uint256 with the emission id
      */
     function upload(
-        uint256 _company,
-        address _bountyHunter,
-        uint256 _emissionsReport,
         bytes32[] memory _inputs)
         public onlyBountyHunter returns(uint256) {
         arbitration.push(
-            Arbitration(_bountyHunter, _company, _emissionsReport, _inputs)
+            Arbitration(true, msg.sender, block.timestamp, _inputs)
         );
         totalArbitration = totalArbitration.add(1);
         return totalArbitration;
@@ -64,11 +61,11 @@ contract Arbitrations is BountyHunterRole, TribunalRole {
      * @dev Get arbitration information
      */
     function get(uint256 _index)
-        public view returns(uint256, address, uint256, uint256){
+        public view returns(bool, address, uint256, uint256){
         return(
-            arbitration[_index].company,
+            arbitration[_index].isOpen,
             arbitration[_index].bountyHunter,
-            arbitration[_index].emissionsReport,
+            arbitration[_index].timestamp,
             arbitration[_index].inputs.length
         );
     }
@@ -82,26 +79,30 @@ contract Arbitrations is BountyHunterRole, TribunalRole {
     }
 
     /**
-     * @dev Add veredict to arbitration
+     * @dev Add verdict to arbitration
      */
-    function addVeredict(bool _agreed, uint256 _company) public onlyTribunal {
-        veredicts[_company].push(Veredicts(_agreed, msg.sender));
-        totalVeredicts[_company] = totalVeredicts[_company].add(1);
+    function addVerdict(bool _agreed, uint256 _abitration) public onlyTribunal {
+        require(arbitration[_abitration].isOpen == true, "");
+        verdicts[_abitration].push(Verdicts(_agreed, msg.sender));
+        totalVerdicts[_abitration] = totalVerdicts[_abitration].add(1);
+        if(totalVerdicts[_abitration] > 4) {
+            arbitration[_abitration].isOpen = false;
+        }
     }
 
     /**
-     * @dev Get total veredicts by company
+     * @dev Get total verdicts by arbitration case
      */
-    function getTotalVeredicts(uint256 _company) public view returns(uint256) {
-        return totalVeredicts[_company];
+    function getTotalVerdicts(uint256 _abitration) public view returns(uint256) {
+        return totalVerdicts[_abitration];
     }
 
     /**
-     * @dev Get a veredict in company
+     * @dev Get a verdict in abitration case
      */
-    function getVeredict(uint256 _company, uint256 _index) public view returns(bool, address) {
+    function getVerdict(uint256 _abitration, uint256 _index) public view returns(bool, address) {
         return (
-            veredicts[_company][_index].agreed, veredicts[_company][_index].tribunal
+            verdicts[_abitration][_index].agreed, verdicts[_abitration][_index].tribunal
         );
     }
 }

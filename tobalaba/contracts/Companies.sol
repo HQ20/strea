@@ -13,6 +13,7 @@ contract Companies {
         uint256[] suppliers;
         uint256[] importedEmissions;
         uint256[] emissionsReports;
+        bytes32 name;
     }
 
     Company[] private company;
@@ -32,9 +33,10 @@ contract Companies {
     function upload(
         uint256[] memory _suppliers,
         uint256[] memory _importedEmissions,
-        uint256[] memory _emissionsReports)
+        uint256[] memory _emissionsReports,
+        bytes32 _name)
         public returns(uint256) {
-        company.push(Company(_suppliers, _importedEmissions, _emissionsReports));
+        company.push(Company(_suppliers, _importedEmissions, _emissionsReports, _name));
         totalCompanies = totalCompanies.add(1);
         return totalCompanies;
     }

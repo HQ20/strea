@@ -11,9 +11,10 @@ contract Emissions {
 
     struct Emission {
         uint256 timestamp;
-        uint256 company;
         uint256 tons;
+        uint256[] arbitrations;
         bytes32 details;
+        bytes32 description;
     }
 
     Emission[] private emissions;
@@ -31,12 +32,14 @@ contract Emissions {
      * @return An uint256 with the emission id
      */
     function upload(
-        uint256 _timestamp,
-        uint256 _company,
         uint256 _tons,
-        bytes32 _details)
+        uint256[] memory _arbitrations,
+        bytes32 _details,
+        bytes32 _description)
         public returns(uint256) {
-        emissions.push(Emission(_timestamp, _company, _tons, _details));
+        emissions.push(Emission(
+            block.timestamp, _tons, _arbitrations, _details, _description
+        ));
         totalEmissions = totalEmissions.add(1);
         return totalEmissions;
     }
@@ -54,12 +57,18 @@ contract Emissions {
      * @return All the emission information
      */
     function get(uint256 _index)
-        public view returns(uint256, uint256, uint256, bytes32) {
+        public view returns(uint256, uint256, uint256, bytes32, bytes32) {
         return(
             emissions[_index].timestamp,
-            emissions[_index].company,
             emissions[_index].tons,
-            emissions[_index].details
+            emissions[_index].arbitrations.length,
+            emissions[_index].details,
+            emissions[_index].description
         );
+    }
+
+    function getArbitration(uint256 _indexEmission, uint256 _indexArbitration)
+        public view returns(uint256) {
+        return (emissions[_indexEmission].arbitrations[_indexArbitration]);
     }
 }
