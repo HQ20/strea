@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 
-class CompanyReport extends Component {
+class EmissionsReport extends Component {
     constructor() {
         super();
         this.state = {
@@ -26,17 +26,17 @@ class CompanyReport extends Component {
                     <ul className="ReportCard__Items">
 
                         <li className="ReportCard__Item">
-                            <p>Company ID:</p>
-                            <p>123</p>
+                            <p>Emission Report ID:</p>
+                            <p>456</p>
                         </li>
 
                         <li className="ReportCard__Item">
-                            <p>Emissions Reported:</p>
-                            <p>18 Emissions</p>
+                            <p>Description:</p>
+                            <p>Operations Manufacturing</p>
                         </li>
 
                         <li className="ReportCard__Item">
-                            <p>Name:</p>
+                            <p>Company:</p>
                             <p>Coca-Cola</p>
                         </li>
 
@@ -46,22 +46,22 @@ class CompanyReport extends Component {
                         </li>
 
                         <li className="ReportCard__Item">
-                            <p>Suppliers:</p>
-                            <p>48</p>
+                            <p>Date:</p>
+                            <p>11 November 2018</p>
                         </li>
 
                         <li className="ReportCard__Item">
-                            <p>Last Report:</p>
-                            <p>11 November 2018</p>
+                            <p>Arbitration Cases:</p>
+                            <p>3</p>
                         </li>
 
                         <li className="ReportCard__Item" />
 
                         <li className="ReportCard__Button">
                             {this.state.isHidden === false ? (
-                                <button onClick={() => this.toggleHidden()} type="button" className="btn btn__lg btn__Black btn__Center">NEW REPORT</button>
+                                <button onClick={() => this.toggleHidden()} type="button" className="btn btn__lg btn__Black btn__Center">OPEN CASE</button>
                             ) : (
-                                <button onClick={() => this.toggleHidden()} type="button" className="btn btn__lg btn__Black btn__Center">SUBMIT REPORT</button>
+                                <button onClick={() => this.toggleHidden()} type="button" className="btn btn__lg btn__Black btn__Center">SUBMIT CASE</button>
                             )}
                         </li>
 
@@ -99,17 +99,17 @@ class CompanyReport extends Component {
                         <div className="Company__Grid Company__Grid--NoBorder">
                             <ul>
                                 <li className="Submit__Card">
-                                    <p>Report ID:</p>
+                                    <p>Case ID:</p>
                                     <p>457</p>
                                 </li>
 
                                 <li className="Submit__Card">
-                                    <p>Report Date:</p>
+                                    <p>Case Date:</p>
                                     <p>4 December 2018</p>
                                 </li>
 
                                 <li className="Submit__Card">
-                                    <p>Carbon Tonnes:</p>
+                                    <p>Bounty Hunter:</p>
                                     <input type="text" className="Submit__Description--Small" />
                                 </li>
 
@@ -127,4 +127,4 @@ class CompanyReport extends Component {
 }
 
 
-export default CompanyReport;
+export default EmissionsReport;

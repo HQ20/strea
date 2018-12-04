@@ -16,7 +16,6 @@ Buttons Section Start
     font-weight: 700;
     height: 30px;
     width: 100px;
-    font-weight: 500;
     font-size: 14px;
     border: 1px solid #DDDD;
     color: #fff;
@@ -35,6 +34,11 @@ Buttons Section Start
 
 .btn__Danger {
     background-color: #d9534f;
+}
+
+.btn__Black {
+    background-color: #000;
+    color: #EFA32A;
 }
 
 .btn__Success {
@@ -61,6 +65,11 @@ Buttons End
     border-bottom: 1px solid #A6A6A6;
 }
 
+.Company__Grid--NoBorder {
+    border-bottom: none;
+}
+
+
 .Company__Card {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
@@ -68,6 +77,10 @@ Buttons End
     border-bottom: 0px;
     padding: 10px 0px;
     background-color: #fff;
+}
+
+.Company__Card-fiveColumns {
+    grid-template-columns: repeat(5, 1fr);
 }
 
 .Company__Card--Black {
@@ -97,7 +110,7 @@ Buttons End
     grid-row-gap: 4px;
     max-width: 1000px;
     margin: auto;
-    background-color:#BFBFBF;
+    background-color:#F3F3F3;
     border: 1px solid #A6A6A6;
     margin-bottom: 20px;
 }
@@ -116,4 +129,32 @@ Buttons End
 
 .ReportCard__Button {
     margin: 20px 0px;
+}
+
+.ReportCard__Button--inline {
+    display: inline-flex;
+}
+
+/* **********************************************************************************
+Submit Section
+*********************************************************************************** */
+
+.Submit__Card {
+    display: grid;
+    grid-template-columns: 200px auto;
+    padding: 20px 0px;
+}
+
+.Submit__Description--Small {
+    width: 30%;
+    height: 30px;
+    border: 1px solid #A6A6A6;
+    background-color: #F3F3F3;
+}
+
+.Submit__Description {
+    width: 99%;
+    height: 60px;
+    border: 1px solid #A6A6A6;
+    background-color: #F3F3F3;
 }
