@@ -12,16 +12,20 @@ contract('Companies', (accounts) => {
             const suppliers = [2, 4];
             const importedEmissions = [1, 5, 8];
             const emissionsReports = [2, 3, 5, 12];
+            const name = 'Some name';
 
-            await CompaniesContractInstance.upload(suppliers, importedEmissions, emissionsReports);
+            await CompaniesContractInstance
+                .upload(suppliers, importedEmissions, emissionsReports, name);
         });
 
         it('Add Another Company', async () => {
             const suppliers = [1, 3, 5];
             const importedEmissions = [2, 3, 4];
             const emissionsReports = [1, 4];
+            const name = 'Some other name';
 
-            await CompaniesContractInstance.upload(suppliers, importedEmissions, emissionsReports);
+            await CompaniesContractInstance
+                .upload(suppliers, importedEmissions, emissionsReports, name);
         });
 
         it('Get total Companies', async () => {

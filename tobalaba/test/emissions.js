@@ -9,8 +9,9 @@ contract('Emissions', (accounts) => {
 
     describe('Verify Emissions', () => {
         it('Add Emissions', async () => {
-            await EmissionsContractInstance.upload(12453837293, 4, 2, 'lol');
-            await EmissionsContractInstance.upload(16347546327, 2, 7, 'cat');
+            const arbitrations = [];
+            await EmissionsContractInstance.upload(2, arbitrations, 'lol', 'again');
+            await EmissionsContractInstance.upload(7, arbitrations, 'cat', 'what');
         });
 
         it('Get total Emissions', async () => {
@@ -20,10 +21,10 @@ contract('Emissions', (accounts) => {
 
         it('Get Emission', async () => {
             const firstEmission = await EmissionsContractInstance.get(0);
-            assert.equal(firstEmission[0], 12453837293);
-            assert.equal(firstEmission[1], 4);
-            assert.equal(firstEmission[2], 2);
+            assert.equal(firstEmission[1] * 1, 2);
+            assert.equal(firstEmission[2], 0);
             assert.equal(web3.toUtf8(firstEmission[3]), 'lol');
+            assert.equal(web3.toUtf8(firstEmission[4]), 'again');
         });
     });
 });

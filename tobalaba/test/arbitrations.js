@@ -9,24 +9,18 @@ contract('Arbitrations', (accounts) => {
 
     describe('Verify Arbitrations', () => {
         it('Add Arbitration', async () => {
-            const company = 2;
-            const bountyHunter = accounts[0];
-            const emissionsReport = 1;
             const inputs = ['hmm', 'hee'];
 
             await ArbitrationsContractInstance.upload(
-                company, bountyHunter, emissionsReport, inputs,
+                inputs, { from: accounts[0] },
             );
         });
 
         it('Add another Arbitration', async () => {
-            const company = 3;
-            const bountyHunter = accounts[1];
-            const emissionsReport = 3;
             const inputs = ['kx', 'iee', 'ieexxx'];
 
             await ArbitrationsContractInstance.upload(
-                company, bountyHunter, emissionsReport, inputs,
+                inputs, { from: accounts[0] },
             );
         });
 
@@ -37,9 +31,8 @@ contract('Arbitrations', (accounts) => {
 
         it('Get Arbitration', async () => {
             const arbitration = await ArbitrationsContractInstance.get(0);
-            assert.equal(arbitration[0] * 1, 2, '');
+            assert.equal(arbitration[0], true, '');
             assert.equal(arbitration[1], accounts[0], '');
-            assert.equal(arbitration[2] * 1, 1, '');
             assert.equal(arbitration[3] * 1, 2, '');
         });
 
@@ -48,20 +41,20 @@ contract('Arbitrations', (accounts) => {
             await ArbitrationsContractInstance.addTribunal(accounts[3]);
         });
 
-        it('Add Veredict to Arbitration', async () => {
-            await ArbitrationsContractInstance.addVeredict(true, 2, { from: accounts[2] });
-            await ArbitrationsContractInstance.addVeredict(false, 2, { from: accounts[3] });
+        it('Add Verdict to Arbitration', async () => {
+            await ArbitrationsContractInstance.addVerdict(true, 0, { from: accounts[2] });
+            await ArbitrationsContractInstance.addVerdict(false, 0, { from: accounts[3] });
         });
 
-        it('Get total Veredicts from Arbitration', async () => {
-            const total = await ArbitrationsContractInstance.getTotalVeredicts(2);
+        it('Get total Verdicts from Arbitration', async () => {
+            const total = await ArbitrationsContractInstance.getTotalVerdicts(0);
             assert.equal(total * 1, 2, '');
         });
 
-        it('Get a Veredict from Arbitration', async () => {
-            const veredict = await ArbitrationsContractInstance.getVeredict(2, 0);
-            assert.equal(veredict[0], true, '');
-            assert.equal(veredict[1], accounts[2], '');
+        it('Get a Verdict from Arbitration', async () => {
+            const verdict = await ArbitrationsContractInstance.getVerdict(0, 0);
+            assert.equal(verdict[0], true, '');
+            assert.equal(verdict[1], accounts[2], '');
         });
     });
 });
