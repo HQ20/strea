@@ -1,5 +1,5 @@
-const SimpleStorage = artifacts.require('./SimpleStorage.sol');
+const Emissions = artifacts.require('./Emissions.sol');
 
 module.exports = function (deployer) {
-    deployer.deploy(SimpleStorage);
+    deployer.deploy(Emissions);
 };
