@@ -1,27 +1,26 @@
 [
     {
         "name": "Coca-Cola",
-        "suppliers": "208",
-        "emissionsReports": "3",
-        "importedEmissions": "3"
+        "suppliers": 208,
+        "emissionsReports": 3,
+        "importedEmissions": 3
     },
-
     {
         "name": "Mercedes",
-        "suppliers": "902000",
-        "emissionsReports": "9",
-        "importedEmissions": "9"
+        "suppliers": 902,
+        "emissionsReports": 9,
+        "importedEmissions": 9
     },
     {
         "name": "Pepsi",
-        "suppliers": "367",
-        "emissionsReports": "2",
-        "importedEmissions": "2"
+        "suppliers": 367,
+        "emissionsReports": 2,
+        "importedEmissions": 2
     },
     {
         "name": "Ford",
-        "suppliers": "367",
-        "emissionsReports": "2",
-        "importedEmissions": "2"
+        "suppliers": 367,
+        "emissionsReports": 2,
+        "importedEmissions": 2
     }
 ]

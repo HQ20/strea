@@ -55,11 +55,12 @@ contract Companies {
      * @dev Get company information (array sizes for example)
      * @return Needed information
      */
-    function get(uint256 _index) public view returns (uint256, uint256, uint256) {
+    function get(uint256 _index) public view returns (uint256, uint256, uint256, bytes32) {
         return(
             company[_index].suppliers.length,
             company[_index].importedEmissions.length,
-            company[_index].emissionsReports.length
+            company[_index].emissionsReports.length,
+            company[_index].name
         );
     }
 
