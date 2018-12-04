@@ -17,8 +17,8 @@
         "build": "react-scripts build",
         "eject": "react-scripts eject",
         "link-contracts": "run-script-os",
-        "link-contracts:linux:darwin": "cd src && ln -s ../../ethereum/build/contracts contracts",
-        "link-contracts:win32": "cd src && mklink \\D contracts ..\\..\\ethereum\\build\\contracts"
+        "link-contracts:linux:darwin": "cd src && ln -s ../../tobalaba/build/contracts contracts",
+        "link-contracts:win32": "cd src && mklink \\D contracts ..\\..\\tobalaba\\build\\contracts"
     },
     "dependencies": {
         "bignumber.js": "^7.2.1",
