@@ -1,0 +1,27 @@
+[
+    {
+        "carbon_tons": "95",
+        "date_of_emissions_report": "28/11/2018",
+        "description": "Operations Manufacturing",
+        "number_of_arbitration_cases": "1",
+        "details": "sdfvgbfhjntgerfmekdçl,",
+        "company": "1"
+    },
+
+
+
+    {
+        "emission_report_id": "212",
+        "carbon_tons": "38",
+        "date_of_emissions_report": "26/10/2018",
+        "description": "Operations Manufacturing",
+        "number_of_arbitration_cases": "3"
+    },
+    {
+        "emission_report_id": "201",
+        "carbon_tons": "67",
+        "date_of_emissions_report": "30/09/2018",
+        "description": "Operations Manufacturing",
+        "number_of_arbitration_cases": "2"
+    }
+]
