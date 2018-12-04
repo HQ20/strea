@@ -9,8 +9,8 @@ contract('Emissions', (accounts) => {
 
     describe('Verify Emissions', () => {
         it('Add Emissions', async () => {
-            EmissionsContractInstance.upload(12453837293, 4, 2, 'lol');
-            EmissionsContractInstance.upload(16347546327, 2, 7, 'cat');
+            await EmissionsContractInstance.upload(12453837293, 4, 2, 'lol');
+            await EmissionsContractInstance.upload(16347546327, 2, 7, 'cat');
         });
 
         it('Get total Emissions', async () => {
