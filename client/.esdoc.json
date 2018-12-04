@@ -1,0 +1,21 @@
+{
+    "source": "./src",
+    "destination": "./docs",
+    "includes": [
+        "\\.jsx$"
+    ],
+    "excludes": [
+        "\\.js$"
+    ],
+    "plugins": [
+        {
+            "name": "esdoc-standard-plugin"
+        },
+        {
+            "name": "esdoc-react-plugin"
+        },
+        {
+            "name": "esdoc-jsx-plugin"
+        }
+    ]
+}

@@ -1,0 +1,45 @@
+{
+    "name": "client",
+    "version": "0.1.0",
+    "private": true,
+    "engineStrict": true,
+    "engines": {
+        "node": ">= 8.12.0",
+        "npm": ">= 6.4.0",
+        "yarn": ">= 1.10.0"
+    },
+    "scripts": {
+        "postinstall": "check-node-version --node '>= 8.12.0' --npm '>= 6.4.0' --yarn '>= 1.10.0'",
+        "pretest": "npm-check --skip-unused",
+        "test": "react-scripts test --env=jsdom --coverage",
+        "docs": "./node_modules/.bin/esdoc",
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "eject": "react-scripts eject",
+        "link-contracts": "run-script-os",
+        "link-contracts:linux:darwin": "cd src && ln -s ../../ethereum/build/contracts contracts",
+        "link-contracts:win32": "cd src && mklink \\D contracts ..\\..\\ethereum\\build\\contracts"
+    },
+    "dependencies": {
+        "bignumber.js": "^7.2.1",
+        "check-node-version": "^3.2.0",
+        "react": "^16.4.2",
+        "react-dom": "^16.4.2",
+        "react-scripts": "1.1.4",
+        "truffle-contract": "^4.0.0-next.0",
+        "web3": "^1.0.0-beta.35"
+    },
+    "devDependencies": {
+        "esdoc": "^1.1.0",
+        "esdoc-jsx-plugin": "^1.0.0",
+        "esdoc-react-plugin": "^1.0.1",
+        "esdoc-standard-plugin": "^1.0.0",
+        "eslint": "^5.6.1",
+        "eslint-config-airbnb": "^17.1.0",
+        "eslint-plugin-import": "^2.14.0",
+        "eslint-plugin-jsx-a11y": "^6.1.1",
+        "eslint-plugin-react": "^7.11.0",
+        "npm-check": "^5.9.0",
+        "run-script-os": "^1.0.3"
+    }
+}

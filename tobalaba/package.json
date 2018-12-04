@@ -1,0 +1,49 @@
+{
+    "name": "ethereum",
+    "version": "0.1.0",
+    "private": true,
+    "main": "truffle-config.js",
+    "engines": {
+        "node": ">=8.12.0",
+        "npm": ">=6.4.0",
+        "yarn": ">= 1.10.0"
+    },
+    "directories": {
+        "test": "test"
+    },
+    "scripts": {
+        "postinstall": "check-node-version --node '>= 8.12.0' --npm '>= 6.4.0' --yarn '>= 1.10.0'",
+        "pretest": "npm-check --skip-unused",
+        "dev": "truffle migrate --reset --network local_ganache",
+        "test": "scripts/test.sh",
+        "coverage": "SOLIDITY_COVERAGE=true scripts/test.sh",
+        "lint:js": "eslint .",
+        "lint:js:fix": "eslint . --fix",
+        "solium": "./node_modules/.bin/solium",
+        "lint:sol": "solium -d contracts/",
+        "lint:sol:fix": "solium -d contracts/ --fix",
+        "lint": "npm run lint:js && npm run lint:sol",
+        "lint:fix": "npm run lint:js:fix && npm run lint:sol:fix"
+    },
+    "dependencies": {
+        "check-node-version": "^3.2.0",
+        "ethereumjs-util": "^6.0.0",
+        "ethereumjs-wallet": "^0.6.2",
+        "openzeppelin-solidity": "^2.0.0",
+        "secp256k1": "^3.5.2"
+    },
+    "devDependencies": {
+        "npm-check": "^5.9.0",
+        "esdoc": "^1.1.0",
+        "esdoc-standard-plugin": "^1.0.0",
+        "eslint": "^5.6.1",
+        "eslint-config-airbnb": "^17.1.0",
+        "eslint-plugin-import": "^2.14.0",
+        "eslint-plugin-jsx-a11y": "^6.1.1",
+        "eslint-plugin-react": "^7.11.0",
+        "solidity-coverage": "^0.5.11",
+        "solium": "^1.1.8",
+        "ganache-cli": "6.1.8",
+        "truffle": "^4.1.14"
+    }
+}
