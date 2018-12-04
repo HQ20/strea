@@ -1,0 +1,86 @@
+body {
+    background-color: #FFF;
+    margin: 0;
+}
+
+/* **********************************************************************************
+Buttons Section Start
+*********************************************************************************** */
+.btn {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    height: 30px;
+    width: 100px;
+    font-weight: 500;
+    font-size: 14px;
+    border: 1px solid #DDDD;
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+}
+
+.btn:active {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.btn__Danger {
+    background-color: #d9534f;
+}
+
+.btn__Success {
+    background-color: #5cb85c;
+}
+
+.btn__Center {
+    display: block;
+    margin: auto
+}
+
+/* **********************************************************************************
+Buttons End
+*********************************************************************************** */
+
+.Main {
+    margin-top: 50px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.Company__Grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    max-width: 1000px;
+    justify-content: center;
+    margin: auto;
+    align-items: center;
+    border-bottom: 1px solid #A6A6A6;
+}
+
+.Company__Card {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    border: 1px solid #A6A6A6;
+    border-bottom: 0px;
+    padding: 10px 0px;
+    background-color: #fff;
+}
+
+.Company__Card--Black {
+    background-color: #000000;
+    color: #fff;
+    border: 1px solid #000000;
+}
+
+.Company__Card__Grey {
+    background-color: #F3F3F3;
+}
+
+.Company__CardTitle {
+    text-align: center;
+    font-weight: 400;
+    font-size: 18px;
+    padding: 6px 0px;
+}
+
+.Company__CardTitle--Bold {
+    font-weight: 700;
+}

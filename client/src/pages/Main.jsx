@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import getWeb3 from '../utils/getWeb3';
 
+import '../App.module.css';
+
 /**
  * This is App.
  */
@@ -57,19 +59,96 @@ class Main extends Component {
      * @ignore
      */
     render() {
-        const { web3, userEther } = this.state;
+        const { web3 } = this.state;
         if (!web3) {
             return <div>Loading Web3, accounts, and contract...</div>;
         }
         return (
-            <div>
-                <h1>Good to Go!</h1>
-                <p>Your Truffle Box is installed and ready.</p>
-                <div>
-                    The userEther value is:
-                    {' '}
-                    {userEther}
-                </div>
+            <div className="Main">
+                {/* {userEther} */}
+                <ul className="Company__Grid">
+
+                    <li className="Company__Card Company__Card--Black">
+                        <p className="Company__CardTitle Company__CardTitle--Bold">Company Name</p>
+                        <p className="Company__CardTitle Company__CardTitle--Bold">Suppliers</p>
+                        <p className="Company__CardTitle Company__CardTitle--Bold">Emissions</p>
+                        <p className="Company__CardTitle Company__CardTitle--Bold">Tons of Carbon</p>
+                        <p className="Company__CardTitle Company__CardTitle--Bold">Date</p>
+                    </li>
+
+                    <li className="Company__Card">
+                        <p className="Company__CardTitle">Coca-Cola</p>
+                        <p className="Company__CardTitle">48 Suppliers</p>
+                        <p className="Company__CardTitle">18 Emissions</p>
+                        <p className="Company__CardTitle">25 Tons of Carbon</p>
+                        <p className="Company__CardTitle">11 Nov 2018</p>
+                        <button type="button" className="btn btn__Success btn__Center">VIEW</button>
+                    </li>
+
+                    <li className="Company__Card Company__Card__Grey">
+                        <p className="Company__CardTitle">Coca-Cola</p>
+                        <p className="Company__CardTitle">48 Suppliers</p>
+                        <p className="Company__CardTitle">18 Emissions</p>
+                        <p className="Company__CardTitle">25 Tons of Carbon</p>
+                        <p className="Company__CardTitle">11 Nov 2018</p>
+                        <button type="button" className="btn btn__Success btn__Center">VIEW</button>
+                    </li>
+
+                    <li className="Company__Card">
+                        <p className="Company__CardTitle">Coca-Cola</p>
+                        <p className="Company__CardTitle">48 Suppliers</p>
+                        <p className="Company__CardTitle">18 Emissions</p>
+                        <p className="Company__CardTitle">25 Tons of Carbon</p>
+                        <p className="Company__CardTitle">11 Nov 2018</p>
+                        <button type="button" className="btn btn__Success btn__Center">VIEW</button>
+                    </li>
+
+                    <li className="Company__Card Company__Card__Grey">
+                        <p className="Company__CardTitle">Coca-Cola</p>
+                        <p className="Company__CardTitle">48 Suppliers</p>
+                        <p className="Company__CardTitle">18 Emissions</p>
+                        <p className="Company__CardTitle">25 Tons of Carbon</p>
+                        <p className="Company__CardTitle">11 Nov 2018</p>
+                        <button type="button" className="btn btn__Success btn__Center">VIEW</button>
+                    </li>
+
+                    <li className="Company__Card">
+                        <p className="Company__CardTitle">Coca-Cola</p>
+                        <p className="Company__CardTitle">48 Suppliers</p>
+                        <p className="Company__CardTitle">18 Emissions</p>
+                        <p className="Company__CardTitle">25 Tons of Carbon</p>
+                        <p className="Company__CardTitle">11 Nov 2018</p>
+                        <button type="button" className="btn btn__Success btn__Center">VIEW</button>
+                    </li>
+
+                    <li className="Company__Card Company__Card__Grey">
+                        <p className="Company__CardTitle">Coca-Cola</p>
+                        <p className="Company__CardTitle">48 Suppliers</p>
+                        <p className="Company__CardTitle">18 Emissions</p>
+                        <p className="Company__CardTitle">25 Tons of Carbon</p>
+                        <p className="Company__CardTitle">11 Nov 2018</p>
+                        <button type="button" className="btn btn__Success btn__Center">VIEW</button>
+                    </li>
+
+                    <li className="Company__Card">
+                        <p className="Company__CardTitle">Coca-Cola</p>
+                        <p className="Company__CardTitle">48 Suppliers</p>
+                        <p className="Company__CardTitle">18 Emissions</p>
+                        <p className="Company__CardTitle">25 Tons of Carbon</p>
+                        <p className="Company__CardTitle">11 Nov 2018</p>
+                        <button type="button" className="btn btn__Success btn__Center">VIEW</button>
+                    </li>
+
+                    <li className="Company__Card Company__Card__Grey">
+                        <p className="Company__CardTitle">Coca-Cola</p>
+                        <p className="Company__CardTitle">48 Suppliers</p>
+                        <p className="Company__CardTitle">18 Emissions</p>
+                        <p className="Company__CardTitle">25 Tons of Carbon</p>
+                        <p className="Company__CardTitle">11 Nov 2018</p>
+                        <button type="button" className="btn btn__Success btn__Center">VIEW</button>
+                    </li>
+
+                </ul>
             </div>
         );
     }
