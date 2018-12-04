@@ -1,4 +1,4 @@
-pragma solidity ^0.5.0;
+pragma solidity ^0.4.24;
 
 import "../node_modules/openzeppelin-solidity/contracts/math/SafeMath.sol";
 
@@ -26,7 +26,6 @@ contract Companies {
 
     /**
      * @dev Upload information about emissions
-     * @param timestamp the moment the report was done
      * @return An uint256 with the emission id
      */
     function upload(
