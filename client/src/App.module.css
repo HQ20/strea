@@ -3,6 +3,11 @@ body {
     margin: 0;
 }
 
+.Component {
+    margin-top: 50px;
+    font-family: 'Roboto', sans-serif;
+}
+
 /* **********************************************************************************
 Buttons Section Start
 *********************************************************************************** */
@@ -17,6 +22,11 @@ Buttons Section Start
     color: #fff;
     cursor: pointer;
     outline: none;
+}
+
+.btn__lg {
+    height: 38px;
+    width: 190px;
 }
 
 .btn:active {
@@ -40,10 +50,6 @@ Buttons Section Start
 Buttons End
 *********************************************************************************** */
 
-.Main {
-    margin-top: 50px;
-    font-family: 'Roboto', sans-serif;
-}
 
 .Company__Grid {
     display: grid;
@@ -83,4 +89,31 @@ Buttons End
 
 .Company__CardTitle--Bold {
     font-weight: 700;
+}
+
+
+
+.ReportCard {
+    grid-row-gap: 4px;
+    max-width: 1000px;
+    margin: auto;
+    background-color:#BFBFBF;
+    border: 1px solid #A6A6A6;
+    margin-bottom: 20px;
+}
+
+.ReportCard__Items {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 10px 20px;
+}
+
+.ReportCard__Item {
+    display: grid;
+    grid-template-columns: repeat(2, 200px);
+    padding: 10px 0px;
+}
+
+.ReportCard__Button {
+    margin: 20px 0px;
 }

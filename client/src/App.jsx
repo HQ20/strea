@@ -11,7 +11,7 @@ export default function renderApp() {
     ReactDOM.render(
         <BrowserRouter>
             <div>
-                <Route path="/" component={Main} />
+                <Route path="/" exact component={Main} />
                 <Route path="/company-report" component={CompanyReport} />
             </div>
         </BrowserRouter>, document.getElementById('root'),

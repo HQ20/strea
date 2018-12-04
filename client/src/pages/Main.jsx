@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import request from 'request';
 import getWeb3 from '../utils/getWeb3';
+
 
 import '../App.module.css';
 
@@ -20,7 +22,7 @@ class Main extends Component {
          * @property {object} state.contract - this is the contract object
          */
         this.state = {
-            userEther: 0, web3: null, accounts: null,
+            userEther: 0, web3: null, accounts: null, companies: null,
         };
     }
 
@@ -43,6 +45,14 @@ class Main extends Component {
             console.log('Failed to load web3, accounts, or contract. Check console for details.');
             console.log(error);
         }
+
+
+        // request('./companiesList.json',
+        //     (error, response) => {
+        //         const companiesData = JSON.parse(response);
+        //         this.setState({ companies: companiesData });
+        //         console.log(response);
+        //     });
     }
 
     /**
@@ -55,6 +65,7 @@ class Main extends Component {
         this.setState({ userEther: web3.utils.fromWei(await web3.eth.getBalance(accounts[0])) });
     }
 
+
     /**
      * @ignore
      */
@@ -64,10 +75,11 @@ class Main extends Component {
             return <div>Loading Web3, accounts, and contract...</div>;
         }
         return (
-            <div className="Main">
+            <div className="Component">
                 {/* {userEther} */}
-                <ul className="Company__Grid">
 
+                {this.getCompanies}
+                <ul className="Company__Grid">
                     <li className="Company__Card Company__Card--Black">
                         <p className="Company__CardTitle Company__CardTitle--Bold">Company Name</p>
                         <p className="Company__CardTitle Company__CardTitle--Bold">Suppliers</p>
