@@ -8,7 +8,7 @@ contract('Companies', (accounts) => {
     });
 
     describe('Verify Companies', () => {
-        it('Add Companies', async () => {
+        it('Add Company', async () => {
             const suppliers = [2, 4];
             const importedEmissions = [1, 5, 8];
             const emissionsReports = [2, 3, 5, 12];
@@ -16,9 +16,17 @@ contract('Companies', (accounts) => {
             await CompaniesContractInstance.upload(suppliers, importedEmissions, emissionsReports);
         });
 
+        it('Add Another Company', async () => {
+            const suppliers = [1, 3, 5];
+            const importedEmissions = [2, 3, 4];
+            const emissionsReports = [1, 4];
+
+            await CompaniesContractInstance.upload(suppliers, importedEmissions, emissionsReports);
+        });
+
         it('Get total Companies', async () => {
             const totalEmissions = await CompaniesContractInstance.getTotal();
-            assert.equal(totalEmissions * 1, 1, '');
+            assert.equal(totalEmissions * 1, 2, '');
         });
 
         it('Get Company', async () => {
@@ -26,6 +34,11 @@ contract('Companies', (accounts) => {
             assert.equal(firstEmission[0] * 1, 2);
             assert.equal(firstEmission[1] * 1, 3);
             assert.equal(firstEmission[2] * 1, 4);
+        });
+
+        it('Get Company Supplier', async () => {
+            const firstSupplier = await CompaniesContractInstance.getSupplier(0, 0);
+            assert.equal(firstSupplier * 1, 2);
         });
     });
 });
