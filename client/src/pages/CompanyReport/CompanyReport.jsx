@@ -4,6 +4,7 @@ import truffleContract from 'truffle-contract';
 import url from 'url';
 import getWeb3 from '../../utils/getWeb3';
 import CompaniesContract from '../../contracts/Companies.json';
+import EmissionsContract from '../../contracts/Emissions.json';
 
 
 class CompanyReport extends Component {
@@ -12,14 +13,19 @@ class CompanyReport extends Component {
         this.state = {
             companyId: null,
             web3: null,
+            accounts: null,
             companiesContract: null,
+            emissionsContract: null,
             isOpeningReport: false,
             newTones: 0,
             newDescription: '',
+            companyName: '',
+            companyEmissions: [],
         };
 
         this.handleViewEmission = this.handleViewEmission.bind(this);
         this.handleSubmitReport = this.handleSubmitReport.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     async componentDidMount() {
@@ -28,12 +34,43 @@ class CompanyReport extends Component {
         const { id } = parts.query;
 
         const web3 = await getWeb3();
+        const accounts = await web3.eth.getAccounts();
 
         const iCompaniesContract = truffleContract(CompaniesContract);
         iCompaniesContract.setProvider(web3.currentProvider);
-        const instance = await iCompaniesContract.deployed();
+        const instanceCompanies = await iCompaniesContract.deployed();
 
-        this.setState({ web3, companiesContract: instance, companyId: id }, this.runExample);
+        const iEmissionsContract = truffleContract(EmissionsContract);
+        iEmissionsContract.setProvider(web3.currentProvider);
+        const instanceEmissions = await iEmissionsContract.deployed();
+
+        const companyName = await web3.utils.toUtf8((await instanceCompanies.get(id))[3]);
+
+        const totalEmissionsCompany = (await instanceCompanies.get(id))[2] * 1;
+        console.log(totalEmissionsCompany);
+        const companyEmissions = [];
+        for (let ce = 0; ce < parseInt(totalEmissionsCompany, 10); ce += 1) {
+            // eslint-disable-next-line no-await-in-loop
+            const emissionId = (await instanceCompanies.getEmission(id, ce)) * 1;
+            console.log(emissionId);
+            // eslint-disable-next-line no-await-in-loop
+            const emission = await instanceEmissions.get(emissionId);
+            companyEmissions.push({
+                tons: emission[1] * 1,
+                arbitrations: emission[2] * 1,
+                description: web3.utils.toUtf8(emission[3]),
+            });
+        }
+        console.log(companyEmissions);
+        this.setState({
+            web3,
+            companiesContract: instanceCompanies,
+            emissionsContract: instanceEmissions,
+            companyId: id,
+            companyName,
+            companyEmissions,
+            accounts,
+        }, this.runExample);
     }
 
     // Toggle the visibility
@@ -50,18 +87,43 @@ class CompanyReport extends Component {
         window.location.href = `/emissions-report?id=${emissionId}`;
     }
 
+    handleChange(event) {
+        this.setState({
+            [event.target.name]: event.target.value,
+        });
+    }
+
     handleViewEmission(event) {
         this.viewEmissions(0); // TODO: prego
         event.preventDefault();
     }
 
     handleSubmitReport(event) {
-        this.viewEmissions(0); // TODO: prego
+        const {
+            web3,
+            newTones,
+            newDescription,
+            emissionsContract,
+            accounts,
+        } = this.state;
+        console.log(newTones, newDescription);
+        emissionsContract.upload(
+            newTones,
+            [],
+            web3.utils.toHex(newDescription),
+            { from: accounts[0] },
+        );
         event.preventDefault();
     }
 
     render() {
-        const { isOpeningReport, newTones, newDescription } = this.state;
+        const {
+            isOpeningReport,
+            newTones,
+            newDescription,
+            companyName,
+            companyEmissions,
+        } = this.state;
         let buttonsToRender;
         if (!isOpeningReport) {
             buttonsToRender = <button onClick={() => this.toggleOpeningReport()} type="button" className="btn btn__lg btn__Success btn__Center">NEW REPORT</button>;
@@ -84,7 +146,7 @@ class CompanyReport extends Component {
 
                         <li className="ReportCard__Item">
                             <p>Name:</p>
-                            <p>Coca-Cola</p>
+                            <p>{companyName}</p>
                         </li>
 
                         <li className="ReportCard__Item">
@@ -113,41 +175,33 @@ class CompanyReport extends Component {
                 {isOpeningReport === false ? (
                     <ul className="Company__Grid">
 
-                        <li className="Company__Card">
-                            <p className="Company__CardTitle">456</p>
-                            <p className="Company__CardTitle">48 Suppliers</p>
-                            <p className="Company__CardTitle">18 Emissions</p>
-                            <p className="Company__CardTitle">25 Tons of Carbon</p>
-                            <p className="Company__CardTitle">11 Nov 2018</p>
-                            <form onSubmit={this.handleViewEmission}>
-                                <input
-                                    type="submit"
-                                    className="btn btn__Success btn__Center"
-                                    value="VIEW"
-                                />
-                            </form>
-                        </li>
-
-                        <li className="Company__Card Company__Card-fiveColumns">
-                            <p className="Company__CardTitle">456</p>
-                            <p className="Company__CardTitle">48 Suppliers</p>
-                            <p className="Company__CardTitle">18 Emissions</p>
-                            <p className="Company__CardTitle">25 Tons of Carbon</p>
-                            <p className="Company__CardTitle">11 Nov 2018</p>
-                        </li>
-
-                        <li className="Company__Card Company__Card-fiveColumns">
-                            <p className="Company__CardTitle">456</p>
-                            <p className="Company__CardTitle">48 Suppliers</p>
-                            <p className="Company__CardTitle">18 Emissions</p>
-                            <p className="Company__CardTitle">25 Tons of Carbon</p>
-                            <p className="Company__CardTitle">11 Nov 2018</p>
-                        </li>
+                        {
+                            companyEmissions.map(ce => (
+                                <li key={ce.tons} className="Company__Card">
+                                    <p className="Company__CardTitle">456</p>
+                                    <p className="Company__CardTitle">48 Suppliers</p>
+                                    <p className="Company__CardTitle">18 Emissions</p>
+                                    <p className="Company__CardTitle">
+                                        {ce.tons}
+                                        {' '}
+                                        Tons of Carbon
+                                    </p>
+                                    <p className="Company__CardTitle">{ce.description}</p>
+                                    <form onSubmit={this.handleViewEmission}>
+                                        <input
+                                            type="submit"
+                                            className="btn btn__Success btn__Center"
+                                            value="VIEW"
+                                        />
+                                    </form>
+                                </li>
+                            ))
+                        }
 
                     </ul>)
                     : (
                         <div className="Company__Grid Company__Grid--NoBorder">
-                            <form>
+                            <form onSubmit={this.handleSubmitReport}>
                                 <ul>
                                     <li className="Submit__Card">
                                         <p>Report ID:</p>
@@ -165,6 +219,7 @@ class CompanyReport extends Component {
                                             type="text"
                                             name="newTones"
                                             value={newTones}
+                                            onChange={this.handleChange}
                                             className="Submit__Description--Small"
                                         />
                                     </li>
@@ -175,6 +230,7 @@ class CompanyReport extends Component {
                                             type="text"
                                             name="newDescription"
                                             value={newDescription}
+                                            onChange={this.handleChange}
                                             className="Submit__Description"
                                         />
                                     </li>

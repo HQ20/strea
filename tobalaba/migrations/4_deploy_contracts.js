@@ -1,5 +1,5 @@
 const Arbitrations = artifacts.require('./Arbitrations.sol');
 
-module.exports = function (deployer) {
+module.exports = (deployer) => {
     deployer.deploy(Arbitrations);
 };

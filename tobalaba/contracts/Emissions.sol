@@ -13,7 +13,6 @@ contract Emissions {
         uint256 timestamp;
         uint256 tons;
         uint256[] arbitrations;
-        bytes32 details;
         bytes32 description;
     }
 
@@ -34,11 +33,10 @@ contract Emissions {
     function upload(
         uint256 _tons,
         uint256[] memory _arbitrations,
-        bytes32 _details,
         bytes32 _description)
         public returns(uint256) {
         emissions.push(Emission(
-            block.timestamp, _tons, _arbitrations, _details, _description
+            block.timestamp, _tons, _arbitrations, _description
         ));
         totalEmissions = totalEmissions.add(1);
         return totalEmissions;
@@ -57,12 +55,11 @@ contract Emissions {
      * @return All the emission information
      */
     function get(uint256 _index)
-        public view returns(uint256, uint256, uint256, bytes32, bytes32) {
+        public view returns(uint256, uint256, uint256, bytes32) {
         return(
             emissions[_index].timestamp,
             emissions[_index].tons,
             emissions[_index].arbitrations.length,
-            emissions[_index].details,
             emissions[_index].description
         );
     }

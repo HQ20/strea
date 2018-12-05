@@ -72,4 +72,9 @@ contract Companies {
         public view returns (uint256) {
         return(company[_companyIndex].suppliers[_supplierIndex]);
     }
+
+    function getEmission(uint256 _companyIndex, uint256 _emissionIndex)
+        public view returns(uint256) {
+        return(company[_companyIndex].emissionsReports[_emissionIndex]);
+    }
 }

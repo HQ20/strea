@@ -58,7 +58,7 @@ class Main extends Component {
             const companyData = await companiesContract.get(c);
             // eslint-disable-next-line no-await-in-loop
             companies.push({
-                suppliers: (companyData[0] * 1),
+                suppliers: (companyData[0] * 1) * 10,
                 emissions: (companyData[1] * 1),
                 tons: (companyData[1] * 1),
                 name: (web3.utils.toUtf8(companyData[3])),
