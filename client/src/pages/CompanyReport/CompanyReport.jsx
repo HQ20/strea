@@ -1,9 +1,9 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
+import truffleContract from 'truffle-contract';
 import url from 'url';
 import getWeb3 from '../../utils/getWeb3';
-import truffleContract from 'truffle-contract';
-import CompaniesContract from '../contracts/Companies.json';
+import CompaniesContract from '../../contracts/Companies.json';
 
 
 class CompanyReport extends Component {
@@ -15,6 +15,8 @@ class CompanyReport extends Component {
             web3: null,
             companiesContract: null,
         };
+
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     async componentDidMount() {
@@ -37,6 +39,17 @@ class CompanyReport extends Component {
         this.setState({
             isHidden: !isHidden,
         });
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    viewEmissions(emissionId) {
+        // eslint-disable-next-line no-undef
+        window.location.href = `/emissions-report?id=${emissionId}`;
+    }
+
+    handleSubmit(event) {
+        this.viewEmissions(0); // TODO: prego
+        event.preventDefault();
     }
 
     render() {
@@ -97,6 +110,13 @@ class CompanyReport extends Component {
                             <p className="Company__CardTitle">18 Emissions</p>
                             <p className="Company__CardTitle">25 Tons of Carbon</p>
                             <p className="Company__CardTitle">11 Nov 2018</p>
+                            <form onSubmit={this.handleSubmit}>
+                                <input
+                                    type="submit"
+                                    className="btn btn__Success btn__Center"
+                                    value="VIEW"
+                                />
+                            </form>
                         </li>
 
                         <li className="Company__Card Company__Card-fiveColumns">
