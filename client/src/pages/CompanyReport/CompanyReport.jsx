@@ -14,9 +14,12 @@ class CompanyReport extends Component {
             web3: null,
             companiesContract: null,
             isOpeningReport: false,
+            newTones: 0,
+            newDescription: '',
         };
 
         this.handleViewEmission = this.handleViewEmission.bind(this);
+        this.handleSubmitReport = this.handleSubmitReport.bind(this);
     }
 
     async componentDidMount() {
@@ -52,13 +55,16 @@ class CompanyReport extends Component {
         event.preventDefault();
     }
 
+    handleSubmitReport(event) {
+        this.viewEmissions(0); // TODO: prego
+        event.preventDefault();
+    }
+
     render() {
-        const { isOpeningReport } = this.state;
+        const { isOpeningReport, newTones, newDescription } = this.state;
         let buttonsToRender;
-        if (isOpeningReport) {
+        if (!isOpeningReport) {
             buttonsToRender = <button onClick={() => this.toggleOpeningReport()} type="button" className="btn btn__lg btn__Success btn__Center">NEW REPORT</button>;
-        } else {
-            buttonsToRender = <button onClick={() => this.toggleOpeningReport()} type="button" className="btn btn__lg btn__Success btn__Center">SUBMIT REPORT</button>;
         }
         return (
             <div className="Component">
@@ -141,27 +147,41 @@ class CompanyReport extends Component {
                     </ul>)
                     : (
                         <div className="Company__Grid Company__Grid--NoBorder">
-                            <ul>
-                                <li className="Submit__Card">
-                                    <p>Report ID:</p>
-                                    <p>457</p>
-                                </li>
+                            <form>
+                                <ul>
+                                    <li className="Submit__Card">
+                                        <p>Report ID:</p>
+                                        <p>457</p>
+                                    </li>
 
-                                <li className="Submit__Card">
-                                    <p>Report Date:</p>
-                                    <p>4 December 2018</p>
-                                </li>
+                                    <li className="Submit__Card">
+                                        <p>Report Date:</p>
+                                        <p>4 December 2018</p>
+                                    </li>
 
-                                <li className="Submit__Card">
-                                    <p>Carbon Tonnes:</p>
-                                    <input type="text" className="Submit__Description--Small" />
-                                </li>
+                                    <li className="Submit__Card">
+                                        <p>Carbon Tonnes:</p>
+                                        <input
+                                            type="text"
+                                            name="newTones"
+                                            value={newTones}
+                                            className="Submit__Description--Small"
+                                        />
+                                    </li>
 
-                                <li className="Submit__Card">
-                                    <p>Description:</p>
-                                    <input type="text" className="Submit__Description" />
-                                </li>
-                            </ul>
+                                    <li className="Submit__Card">
+                                        <p>Description:</p>
+                                        <input
+                                            type="text"
+                                            name="newDescription"
+                                            value={newDescription}
+                                            className="Submit__Description"
+                                        />
+                                    </li>
+                                </ul>
+                                <input type="submit" className="btn btn__lg btn__Success btn__Center" value="SUBMIT REPORT" />
+                                <button onClick={() => this.toggleOpeningReport()} type="button">CANCEL</button>
+                            </form>
                         </div>
                     )}
 
