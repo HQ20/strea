@@ -10,10 +10,10 @@ class CompanyReport extends Component {
     constructor() {
         super();
         this.state = {
-            isHidden: false,
             companyId: null,
             web3: null,
             companiesContract: null,
+            isOpeningReport: false,
         };
 
         this.handleViewEmission = this.handleViewEmission.bind(this);
@@ -34,10 +34,10 @@ class CompanyReport extends Component {
     }
 
     // Toggle the visibility
-    toggleHidden() {
-        const { isHidden } = this.state;
+    toggleOpeningReport() {
+        const { isOpeningReport } = this.state;
         this.setState({
-            isHidden: !isHidden,
+            isOpeningReport: !isOpeningReport,
         });
     }
 
@@ -53,6 +53,13 @@ class CompanyReport extends Component {
     }
 
     render() {
+        const { isOpeningReport } = this.state;
+        let buttonsToRender;
+        if (isOpeningReport) {
+            buttonsToRender = <button onClick={() => this.toggleOpeningReport()} type="button" className="btn btn__lg btn__Success btn__Center">NEW REPORT</button>;
+        } else {
+            buttonsToRender = <button onClick={() => this.toggleOpeningReport()} type="button" className="btn btn__lg btn__Success btn__Center">SUBMIT REPORT</button>;
+        }
         return (
             <div className="Component">
 
@@ -92,16 +99,12 @@ class CompanyReport extends Component {
                         <li className="ReportCard__Item" />
 
                         <li className="ReportCard__Button">
-                            {this.state.isHidden === false ? (
-                                <button onClick={() => this.toggleHidden()} type="button" className="btn btn__lg btn__Success btn__Center">NEW REPORT</button>
-                            ) : (
-                                <button onClick={() => this.toggleHidden()} type="button" className="btn btn__lg btn__Success btn__Center">SUBMIT REPORT</button>
-                            )}
+                            {buttonsToRender}
                         </li>
 
                     </ul>
                 </div>
-                {this.state.isHidden === false ? (
+                {isOpeningReport === false ? (
                     <ul className="Company__Grid">
 
                         <li className="Company__Card Company__Card-fiveColumns">
