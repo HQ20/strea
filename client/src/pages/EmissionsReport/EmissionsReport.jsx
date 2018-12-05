@@ -174,8 +174,10 @@ class EmissionsReport extends Component {
                                         <input type="text" className="Submit__Description" />
                                     </li>
                                 </ul>
-                                <input type="submit" className="btn btn__lg btn__Success btn__Center" value="SUBMIT CASE"/>
-                                <button onClick={() => this.toggleOpeningCase()} type="button">CANCEL</button>
+                                <div className="btn__Container">
+                                    <input type="submit" className="btn btn__lg btn__Success btn__Center btn__NoMargin" value="SUBMIT CASE"/>
+                                    <button className="btn btn__lg btn__Danger btn__Center btn__NoMargin" onClick={() => this.toggleOpeningCase()} type="button">CANCEL</button>
+                                </div>
                             </form>
                         </div>
                     )}
