@@ -1,5 +1,9 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
+import url from 'url';
+import getWeb3 from '../../utils/getWeb3';
+import truffleContract from 'truffle-contract';
+import CompaniesContract from '../contracts/Companies.json';
 
 
 class CompanyReport extends Component {
@@ -7,7 +11,24 @@ class CompanyReport extends Component {
         super();
         this.state = {
             isHidden: false,
+            companyId: null,
+            web3: null,
+            companiesContract: null,
         };
+    }
+
+    async componentDidMount() {
+        // eslint-disable-next-line no-undef
+        const parts = url.parse(window.location.href, true);
+        const { id } = parts.query;
+
+        const web3 = await getWeb3();
+
+        const iCompaniesContract = truffleContract(CompaniesContract);
+        iCompaniesContract.setProvider(web3.currentProvider);
+        const instance = await iCompaniesContract.deployed();
+
+        this.setState({ web3, companiesContract: instance, companyId: id }, this.runExample);
     }
 
     // Toggle the visibility
