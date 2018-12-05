@@ -10,13 +10,15 @@ class EmissionsReport extends Component {
     constructor() {
         super();
         this.state = {
-            isHidden: false,
             companyId: null,
             web3: null,
+            accounts: null,
             companiesContract: null,
+            isOpeningCase: false,
         };
 
         this.handleViewCase = this.handleViewCase.bind(this);
+        this.handleSubmitCase = this.handleSubmitCase.bind(this);
     }
 
     async componentDidMount() {
@@ -25,19 +27,25 @@ class EmissionsReport extends Component {
         const { id } = parts.query;
 
         const web3 = await getWeb3();
+        const accounts = await web3.eth.getAccounts();
 
         const iCompaniesContract = truffleContract(CompaniesContract);
         iCompaniesContract.setProvider(web3.currentProvider);
         const instance = await iCompaniesContract.deployed();
 
-        this.setState({ web3, companiesContract: instance, companyId: id }, this.runExample);
+        this.setState({
+            web3,
+            accounts,
+            companiesContract: instance,
+            companyId: id
+        }, this.runExample);
     }
 
     // Toggle the visibility
-    toggleHidden() {
-        const { isHidden } = this.state;
+    toggleOpeningCase() {
+        const { isOpeningCase } = this.state;
         this.setState({
-            isHidden: !isHidden,
+            isOpeningCase: !isOpeningCase,
         });
     }
 
@@ -52,7 +60,17 @@ class EmissionsReport extends Component {
         event.preventDefault();
     }
 
+    handleSubmitCase(event) {
+        this.viewCase(0); // TODO: prego
+        event.preventDefault();
+    }
+
     render() {
+        const { isOpeningCase, accounts } = this.state;
+        let buttonsToRender;
+        if (!isOpeningCase) {
+            buttonsToRender = <button onClick={() => this.toggleOpeningCase()} type="button" className="btn btn__lg btn__Success btn__Center">OPEN CASE</button>;
+        }
         return (
             <div className="Component">
 
@@ -92,16 +110,12 @@ class EmissionsReport extends Component {
                         <li className="ReportCard__Item" />
 
                         <li className="ReportCard__Button">
-                            {this.state.isHidden === false ? (
-                                <button onClick={() => this.toggleHidden()} type="button" className="btn btn__lg btn__Success btn__Center">OPEN CASE</button>
-                            ) : (
-                                <button onClick={() => this.toggleHidden()} type="button" className="btn btn__lg btn__Success btn__Center">SUBMIT CASE</button>
-                            )}
+                            {buttonsToRender}
                         </li>
 
                     </ul>
                 </div>
-                {this.state.isHidden === false ? (
+                {isOpeningCase === false ? (
                     <ul className="Company__Grid">
 
                         <li className="Company__Card">
@@ -138,27 +152,31 @@ class EmissionsReport extends Component {
                     </ul>)
                     : (
                         <div className="Company__Grid Company__Grid--NoBorder">
-                            <ul>
-                                <li className="Submit__Card">
-                                    <p>Case ID:</p>
-                                    <p>457</p>
-                                </li>
+                            <form onSubmit={this.handleSubmitCase}>
+                                <ul>
+                                    <li className="Submit__Card">
+                                        <p>Case ID:</p>
+                                        <p>457</p>
+                                    </li>
 
-                                <li className="Submit__Card">
-                                    <p>Case Date:</p>
-                                    <p>4 December 2018</p>
-                                </li>
+                                    <li className="Submit__Card">
+                                        <p>Case Date:</p>
+                                        <p>4 December 2018</p>
+                                    </li>
 
-                                <li className="Submit__Card">
-                                    <p>Bounty Hunter:</p>
-                                    <input type="text" className="Submit__Description--Small" />
-                                </li>
+                                    <li className="Submit__Card">
+                                        <p>Bounty Hunter:</p>
+                                        <input type="text" disabled value={accounts[0]} className="Submit__Description--Small" />
+                                    </li>
 
-                                <li className="Submit__Card">
-                                    <p>Description:</p>
-                                    <input type="text" className="Submit__Description" />
-                                </li>
-                            </ul>
+                                    <li className="Submit__Card">
+                                        <p>Description:</p>
+                                        <input type="text" className="Submit__Description" />
+                                    </li>
+                                </ul>
+                                <input type="submit" className="btn btn__lg btn__Success btn__Center" value="SUBMIT CASE"/>
+                                <button onClick={() => this.toggleOpeningCase()} type="button">CANCEL</button>
+                            </form>
                         </div>
                     )}
 
