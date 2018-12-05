@@ -104,7 +104,7 @@ class EmissionsReport extends Component {
                 {this.state.isHidden === false ? (
                     <ul className="Company__Grid">
 
-                        <li className="Company__Card Company__Card-fiveColumns">
+                        <li className="Company__Card">
                             <p className="Company__CardTitle">456</p>
                             <p className="Company__CardTitle">48 Suppliers</p>
                             <p className="Company__CardTitle">18 Emissions</p>
