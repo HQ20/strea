@@ -77,4 +77,8 @@ contract Companies {
         public view returns(uint256) {
         return(company[_companyIndex].emissionsReports[_emissionIndex]);
     }
+
+    function addEmission(uint256 _companyIndex, uint256 _emissionIndex) public {
+        company[_companyIndex].emissionsReports.push(_emissionIndex);
+    }
 }

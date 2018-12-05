@@ -104,6 +104,8 @@ class CompanyReport extends Component {
             newTones,
             newDescription,
             emissionsContract,
+            companiesContract,
+            companyId,
             accounts,
         } = this.state;
         console.log(newTones, newDescription);
@@ -112,7 +114,10 @@ class CompanyReport extends Component {
             [],
             web3.utils.toHex(newDescription),
             { from: accounts[0] },
-        );
+        ).then(async () => {
+            const index = (await emissionsContract.getTotal()) * 1;
+            await companiesContract.addEmission(companyId, index - 1, { from: accounts[0] });
+        });
         event.preventDefault();
     }
 
