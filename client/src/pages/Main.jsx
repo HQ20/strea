@@ -23,6 +23,8 @@ class Main extends Component {
         this.state = {
             web3: null, companiesContract: null, companies: [],
         };
+
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     /**
@@ -47,15 +49,35 @@ class Main extends Component {
      * this is an entry method to load info.
      */
     async runExample() {
-        const { companiesContract } = this.state;
+        const { web3, companiesContract } = this.state;
         const companies = [];
 
         const totalCompanies = await companiesContract.getTotal() * 1;
         for (let c = 0; c < totalCompanies; c += 1) {
             // eslint-disable-next-line no-await-in-loop
-            companies.push(await companiesContract.get(c));
+            const companyData = await companiesContract.get(c);
+            // eslint-disable-next-line no-await-in-loop
+            companies.push({
+                suppliers: (companyData[0] * 1),
+                emissions: (companyData[1] * 1),
+                tons: (companyData[1] * 1),
+                name: (web3.utils.toUtf8(companyData[3])),
+                id: c,
+            });
         }
+        // console.log(companies);
         this.setState({ companies });
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    viewCompany(compantId) {
+        // eslint-disable-next-line no-undef
+        window.location.href = `/company-report?id=${compantId}`;
+    }
+
+    handleSubmit(event) {
+        this.viewCompany(0); // TODO: prego
+        event.preventDefault();
     }
 
     /**
@@ -79,24 +101,30 @@ class Main extends Component {
                     {
                         companies.map(c => (
                             <li className="Company__Card">
-                                <p className="Company__CardTitle">{web3.utils.toUtf8(c[3])}</p>
+                                <p className="Company__CardTitle">{c.name}</p>
                                 <p className="Company__CardTitle">
-                                    {c[0] * 1}
+                                    {c.suppliers}
                                     {' '}
                                     Suppliers
                                 </p>
                                 <p className="Company__CardTitle">
-                                    {c[1] * 1}
+                                    {c.emissions}
                                     {' '}
                                     Emissions
                                 </p>
                                 <p className="Company__CardTitle">
-                                    {c[2] * 1}
+                                    {c.tons}
                                     {' '}
                                     Tonnes of Carbon
                                 </p>
                                 <p className="Company__CardTitle">11 Nov 2018</p>
-                                <button type="button" className="btn btn__Success btn__Center">VIEW</button>
+                                <form onSubmit={this.handleSubmit}>
+                                    <input
+                                        type="submit"
+                                        className="btn btn__Success btn__Center"
+                                        value="VIEW"
+                                    />
+                                </form>
                             </li>
                         ))
                     }
