@@ -50,6 +50,16 @@ Buttons Section Start
     margin: auto
 }
 
+.btn__Container {
+    display: inline-flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.btn__NoMargin {
+    margin: 20px 10px;
+}
+
 /* **********************************************************************************
 Buttons End
 *********************************************************************************** */

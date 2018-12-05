@@ -179,8 +179,10 @@ class CompanyReport extends Component {
                                         />
                                     </li>
                                 </ul>
-                                <input type="submit" className="btn btn__lg btn__Success btn__Center" value="SUBMIT REPORT" />
-                                <button onClick={() => this.toggleOpeningReport()} type="button">CANCEL</button>
+                                <div className="btn__Container">
+                                    <input type="submit" className="btn btn__lg btn__Success btn__Center btn__NoMargin" value="SUBMIT REPORT" />
+                                    <button className="btn btn__lg btn__Danger btn__Center btn__NoMargin" onClick={() => this.toggleOpeningReport()} type="button">CANCEL</button>
+                                </div>
                             </form>
                         </div>
                     )}
