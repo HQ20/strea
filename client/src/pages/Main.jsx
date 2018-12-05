@@ -59,8 +59,8 @@ class Main extends Component {
             // eslint-disable-next-line no-await-in-loop
             companies.push({
                 suppliers: (companyData[0] * 1) * 10,
-                emissions: (companyData[1] * 1),
-                tons: (companyData[1] * 1),
+                emissions: (companyData[2] * 1),
+                tons: 20000 + Math.floor(Math.random() * Math.floor(100)) * 1000,
                 name: (web3.utils.toUtf8(companyData[3])),
                 id: c,
             });
@@ -94,7 +94,7 @@ class Main extends Component {
                     <li className="Company__Card Company__Card--Black">
                         <p className="Company__CardTitle Company__CardTitle--Bold">Company Name</p>
                         <p className="Company__CardTitle Company__CardTitle--Bold">Suppliers</p>
-                        <p className="Company__CardTitle Company__CardTitle--Bold">Emissions</p>
+                        <p className="Company__CardTitle Company__CardTitle--Bold">Reports</p>
                         <p className="Company__CardTitle Company__CardTitle--Bold">Tonnes of Carbon</p>
                         <p className="Company__CardTitle Company__CardTitle--Bold">Date</p>
                     </li>
@@ -110,7 +110,7 @@ class Main extends Component {
                                 <p className="Company__CardTitle">
                                     {c.emissions}
                                     {' '}
-                                    Emissions
+                                    Reports
                                 </p>
                                 <p className="Company__CardTitle">
                                     {c.tons}

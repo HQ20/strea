@@ -146,7 +146,7 @@ class CompanyReport extends Component {
 
                         <li className="ReportCard__Item">
                             <p>Emissions Reported:</p>
-                            <p>18 Emissions</p>
+                            <p>18 Reports</p>
                         </li>
 
                         <li className="ReportCard__Item">
@@ -185,7 +185,7 @@ class CompanyReport extends Component {
                                 <li key={ce.tons} className="Company__Card">
                                     <p className="Company__CardTitle">456</p>
                                     <p className="Company__CardTitle">48 Suppliers</p>
-                                    <p className="Company__CardTitle">18 Emissions</p>
+                                    <p className="Company__CardTitle">18 Reports</p>
                                     <p className="Company__CardTitle">
                                         {ce.tons}
                                         {' '}

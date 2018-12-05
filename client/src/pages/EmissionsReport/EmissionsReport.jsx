@@ -133,20 +133,34 @@ class EmissionsReport extends Component {
                             </form>
                         </li>
 
-                        <li className="Company__Card Company__Card-fiveColumns">
+                        <li className="Company__Card">
                             <p className="Company__CardTitle">456</p>
                             <p className="Company__CardTitle">48 Suppliers</p>
                             <p className="Company__CardTitle">18 Emissions</p>
                             <p className="Company__CardTitle">25 Tons of Carbon</p>
                             <p className="Company__CardTitle">11 Nov 2018</p>
+                            <form onSubmit={this.handleViewCase}>
+                                <input
+                                    type="submit"
+                                    className="btn btn__Success btn__Center"
+                                    value="VIEW"
+                                />
+                            </form>
                         </li>
 
-                        <li className="Company__Card Company__Card-fiveColumns">
+                        <li className="Company__Card">
                             <p className="Company__CardTitle">456</p>
                             <p className="Company__CardTitle">48 Suppliers</p>
                             <p className="Company__CardTitle">18 Emissions</p>
                             <p className="Company__CardTitle">25 Tons of Carbon</p>
                             <p className="Company__CardTitle">11 Nov 2018</p>
+                            <form onSubmit={this.handleViewCase}>
+                                <input
+                                    type="submit"
+                                    className="btn btn__Success btn__Center"
+                                    value="VIEW"
+                                />
+                            </form>
                         </li>
 
                     </ul>)
