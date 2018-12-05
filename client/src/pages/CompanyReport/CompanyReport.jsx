@@ -16,7 +16,7 @@ class CompanyReport extends Component {
             companiesContract: null,
         };
 
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleViewEmission = this.handleViewEmission.bind(this);
     }
 
     async componentDidMount() {
@@ -47,7 +47,7 @@ class CompanyReport extends Component {
         window.location.href = `/emissions-report?id=${emissionId}`;
     }
 
-    handleSubmit(event) {
+    handleViewEmission(event) {
         this.viewEmissions(0); // TODO: prego
         event.preventDefault();
     }
@@ -110,7 +110,7 @@ class CompanyReport extends Component {
                             <p className="Company__CardTitle">18 Emissions</p>
                             <p className="Company__CardTitle">25 Tons of Carbon</p>
                             <p className="Company__CardTitle">11 Nov 2018</p>
-                            <form onSubmit={this.handleSubmit}>
+                            <form onSubmit={this.handleViewEmission}>
                                 <input
                                     type="submit"
                                     className="btn btn__Success btn__Center"
